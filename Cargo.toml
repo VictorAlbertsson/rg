@@ -1,0 +1,9 @@
+[package]
+name = "rg" # "Rust Graphics"
+version = "0.1.0"
+authors = ["Victor Albertsson <victor.albertsson@live.se>"]
+edition = "2018"
+
+[dependencies]
+#winit = "*"
+log = "0.4"

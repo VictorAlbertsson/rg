@@ -1,0 +1,25 @@
+#+TITLE: (((Pure))) Rust Game Engine
+#+AUTHOR: Victor Albertsson
+#+OPTIONS: num:nil toc:nil
+* Game Engine
+** Entrypoint
+** Application layer
+** Window layer
+*** [[https://github.com/rust-windowing/winit][Winit]]
+/"Cross-platform window creation and management in Rust"/
+*** Input
+*** Events
+** Renderer
+Initially the backend will be OpenGL, later I might switch to gfx-hal.
+** Render API abstraction
+** Debugging support
+** Scripting language
+*** [[https://github.com/murarth/ketos][Ketos]]
+/"The primary goal of Ketos is to serve as a scripting and extension
+language for programs written in the Rust programming language."/
+** Memory systems
+** Entity-component system (ECS)
+** Physics
+** File I/O, VFS
+** Build system
+*** Hotswapping assets
