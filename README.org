@@ -1,8 +1,11 @@
-#+TITLE: (((Pure))) Rust Game Engine
+#+TITLE: Rust Graphics
+#+SUBTITLE: one-stop-shop API for graphical Rust applications
 #+AUTHOR: Victor Albertsson
 #+OPTIONS: num:nil toc:nil
 * Game Engine
 ** Entrypoint
+*** ~Core~ application struct
+*** Layer framework
 ** Application layer
 ** Window layer
 *** [[https://github.com/rust-windowing/winit][Winit]]
