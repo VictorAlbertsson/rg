@@ -2,7 +2,7 @@
 #+SUBTITLE: one-stop-shop API for graphical Rust applications
 #+AUTHOR: Victor Albertsson
 #+OPTIONS: num:nil toc:nil
-* Game Engine
+* Outline
 ** Entrypoint
 *** ~Core~ application struct
 *** Layer framework
