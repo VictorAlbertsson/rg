@@ -1,85 +1,65 @@
-use std::any::Any;
-use crate::window::Window;
-use std::cell::RefCell;
-
-/// Requires that the user spacifies a static lifetime
-pub trait Event<T> {
-    // This might fail
-    fn register<D>(&mut self, hook: Hook<T, D>);
-    fn notify(&self, message: T);
+pub trait Event {
+    fn on_user_event(&self);
+    fn on_close(&self);
+    fn on_resize(&self, x: u32, y: u32);
+    fn on_focus(&self);
+    fn on_focus_lost(&self);
+    fn on_moved(&self);
+    fn on_tick(&self);
+    fn on_update(&self);
+    fn on_render(&self);
+    fn on_keypress(&self, key: char, repeats: u32);
+    fn on_keyrelease(&self, key: char);
+    fn on_mouse_moved(&self, x: f64, y: f64);
+    fn on_mouse_scrolled(&self, x_offset: f64, y_offset: f64);
+    fn on_mouse_buttonpress(&self, button: u32);
+    fn on_mouse_buttonrelease(&self, button: u32);
 }
 
-pub type Hook<T, D> = fn(&T, D) -> &T;
+impl Event for winit::window::Window {
+    fn on_user_event(&self) {
 
-/// Generic event handler
-/// If you need to store more data you can make your own handler
-pub struct EventHandler<T, D> {
-    // Are vectors of unsized elements allowed?
-    // Hooks are unsized.
-    hooks: Vec<Hook<T, D>>,
-}
-
-impl<T, D> EventHandler<T, D> {
-    pub fn new() -> Self {
-	Self {
-	    hooks: vec![]
-	}
     }
-}
+    fn on_close(&self) {
 
-/// Generic event implementation
-impl<T, D> Event<T> for EventHandler<T, D> {
-    fn register<C>(&mut self, hook: Hook<T, C>) {
-	self.hooks.push(hook);
     }
-    fn notify(&self, event: T) {
-	for callback in self.hooks {
-//	    (callback.into_inner())(&event);
-	}
+    fn on_resize(&self, x: u32, y: u32) {
+
     }
-}
+    fn on_focus(&self) {
 
-pub struct WindowEventHandler {
-    pub window: winit::window::Window,
-    pub hooks: Vec<Hook<WindowEvent, winit::window::Window>>,
-}
-
-impl WindowEventHandler {
-    pub fn new(w: winit::window::Window) -> Self {
-	Self {
-	    window: w,
-	    hooks: vec![],
-	}
     }
-}
+    fn on_focus_lost(&self) {
 
-impl Event<WindowEvent> for WindowEventHandler {
-    fn register<winit::window::Window>(&mut self, hook: Hook<WindowEvent, winit::window::Window>) {
-	self.hooks.push(hook);
     }
-    fn notify(&self, event: WindowEvent) {
-	for callback in self.hooks {
-	    callback(&event, self.window);
-	}
+    fn on_moved(&self) {
+
     }
-}
+    fn on_tick(&self) {
 
-pub enum WindowEvent {
-    Close,
-    Resize(u32, u32),
-    Focus,
-    LostFocus,
-    Moved,
-    Tick,
-    Update,
-    Render,
-}
+    }
+    fn on_update(&self) {
 
-pub enum InputEvent {
-    Keypress(char, u32),
-    Keyrelease(char),
-    MouseMoved(f64, f64),
-    MouseScrolled(f64, f64),
-    MouseButtonpress(u32),
-    MouseButtonrelease(u32),
+    }
+    fn on_render(&self) {
+
+    }
+    fn on_keypress(&self, key: char, repeats: u32) {
+
+    }
+    fn on_keyrelease(&self, key: char) {
+
+    }
+    fn on_mouse_moved(&self, x: f64, y: f64) {
+
+    }
+    fn on_mouse_scrolled(&self, x_offset: f64, y_offset: f64) {
+
+    }
+    fn on_mouse_buttonpress(&self, button: u32) {
+
+    }
+    fn on_mouse_buttonrelease(&self, button: u32) {
+
+    }
 }
