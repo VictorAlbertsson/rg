@@ -1,11 +1,11 @@
-//use crate::events::{Event, WinitEventHandler};
+use crate::events::{Event, WindowEventHandler, WindowEvent};
 
 pub struct Window {
     pub window: winit::window::Window,
     pub events: winit::event_loop::EventLoop<()>,
 }
 
-impl Window {
+impl<'x> Window {
     pub fn new<T, U>(title: T, size: U) -> Result<Self, winit::error::OsError> where
 	T: Into<String>,
 	U: Into<winit::dpi::Size> {
@@ -20,11 +20,27 @@ impl Window {
 	})
     }
     pub fn run(self) { // Consumes `self`
-//	let mut winit_handler = WinitEventHandler::new();
-	//handler.register();
-	self.events.run(move |_e, _, _s| {
-//	    handler.notify(&temp);
+	let mut handler = WindowEventHandler::new(self.window);
+	handler.register(on_resize);
+	self.events.run(move |event, _, _s| {
+	    match event {
+		winit::event::Event::WindowEvent {
+		    event: winit::event::WindowEvent::Resized(psize),
+		    ..
+		} => handler.notify(WindowEvent::Resize(psize.width, psize.height)),
+		_ => (),
+	    }
 	});
+    }
+}
+
+pub fn on_resize<'a>(event: &'a WindowEvent, input: &Window) -> &'a WindowEvent {
+    match event {
+	WindowEvent::Resize(x, y) => {
+	    input.window.request_redraw();
+	    &event
+	},
+	_ => &event,
     }
 }
 
