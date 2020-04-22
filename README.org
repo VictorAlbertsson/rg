@@ -33,6 +33,24 @@ language for programs written in the Rust programming language./"
 ** Build system
 *** Hotswapping assets
 * Timeline
-** TODO (RG) Windowing and basic rendering
+** TODO School project [0%]
    DEADLINE: <2020-06-05 Fri>
-Vet inte exakt när projektet ska vara klart.
+- [ ] Window and rudimentary input system
+- [ ] Event system
+- [ ] Basic rendering and UI
+- [ ] Maybe a renderer?
+** MVP (1.0.0) [0%]
+- [ ] OpenGL renderer
+- [ ] Unified windowing abstractions
+- [ ] User input with cross-platform keycodes
+- [ ] UI system (with debugging specific UI)
+- [ ] Simple physics engine
+** Product release (2.0.0) [0%]
+- [ ] OpenGL, Vulkan, Metal, DirectX12 unified renderer
+- [ ] Flexible and extensible event systems
+- [ ] ECS (Entity-Component System)
+- [ ] Scripting language
+- [ ] Performant physics engine
+- [ ] Concurrency and multithreading
+- [ ] Asset management system
+- [ ] Advanced input system with raycasters (2D + 3D + UI)
