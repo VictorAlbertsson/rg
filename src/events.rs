@@ -1,65 +1,46 @@
-pub trait Event {
-    fn on_user_event(&self);
-    fn on_close(&self);
-    fn on_resize(&self, x: u32, y: u32);
-    fn on_focus(&self);
-    fn on_focus_lost(&self);
-    fn on_moved(&self);
-    fn on_tick(&self);
-    fn on_update(&self);
-    fn on_render(&self);
-    fn on_keypress(&self, key: char, repeats: u32);
-    fn on_keyrelease(&self, key: char);
-    fn on_mouse_moved(&self, x: f64, y: f64);
-    fn on_mouse_scrolled(&self, x_offset: f64, y_offset: f64);
-    fn on_mouse_buttonpress(&self, button: u32);
-    fn on_mouse_buttonrelease(&self, button: u32);
+pub trait Events {
+    fn on_none();
+    fn on_close(&mut self);
+    fn on_resize(x: u32, y: u32);
+    fn on_focus();
+    fn on_focus_lost();
+    fn on_moved();
+    fn on_tick();
+    fn on_update();
+    fn on_render();
+    fn on_key_pressed(keycode: char, repeats: u32);
+    fn on_key_released(keycode: char);
+    fn on_mouse_moved(x: f64, y: f64);
+    fn on_mouse_scrolled(dx: f64, dy: f64);
+    fn on_mouse_pressed(button: u32);
+    fn on_mouse_released(button: u32);
+    fn on_mousemoved(x: f64, y: f64);
+    fn on_mousescrolled(dx: f64, dy: f64);
+    fn on_mousepress(button: u32);
+    fn on_mouserelease(button: u32);
 }
 
-impl Event for winit::window::Window {
-    fn on_user_event(&self) {
-
+// TODO: Implement trait fully
+impl Events for glfw::Window {
+    fn on_none() {}
+    fn on_close(&mut self) {
+	self.set_should_close(true);
     }
-    fn on_close(&self) {
-
-    }
-    fn on_resize(&self, x: u32, y: u32) {
-
-    }
-    fn on_focus(&self) {
-
-    }
-    fn on_focus_lost(&self) {
-
-    }
-    fn on_moved(&self) {
-
-    }
-    fn on_tick(&self) {
-
-    }
-    fn on_update(&self) {
-
-    }
-    fn on_render(&self) {
-
-    }
-    fn on_keypress(&self, key: char, repeats: u32) {
-
-    }
-    fn on_keyrelease(&self, key: char) {
-
-    }
-    fn on_mouse_moved(&self, x: f64, y: f64) {
-
-    }
-    fn on_mouse_scrolled(&self, x_offset: f64, y_offset: f64) {
-
-    }
-    fn on_mouse_buttonpress(&self, button: u32) {
-
-    }
-    fn on_mouse_buttonrelease(&self, button: u32) {
-
-    }
+    fn on_resize(x: u32, y: u32) {}
+    fn on_focus() {}
+    fn on_focus_lost() {}
+    fn on_moved() {}
+    fn on_tick() {}
+    fn on_update() {}
+    fn on_render() {}
+    fn on_key_pressed(keycode: char, repeats: u32) {}
+    fn on_key_released(keycode: char) {}
+    fn on_mouse_moved(x: f64, y: f64) {}
+    fn on_mouse_scrolled(dx: f64, dy: f64) {}
+    fn on_mouse_pressed(button: u32) {}
+    fn on_mouse_released(button: u32) {}
+    fn on_mousemoved(x: f64, y: f64) {}
+    fn on_mousescrolled(dx: f64, dy: f64) {}
+    fn on_mousepress(button: u32) {}
+    fn on_mouserelease(button: u32) {}
 }

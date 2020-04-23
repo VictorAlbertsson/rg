@@ -34,7 +34,6 @@ language for programs written in the Rust programming language./"
 *** Hotswapping assets
 * Timeline
 ** TODO School project [0%]
-   DEADLINE: <2020-06-05 Fri>
 - [ ] Window and rudimentary input system
 - [ ] Event system
 - [ ] Basic rendering and UI
