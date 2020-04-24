@@ -30,7 +30,7 @@ pub trait WindowEvents: Events {
 impl Events for Window {
     fn on_create(&mut self) {
 	self.window.make_current();
-	self.window.set_key_polling(true);
+	self.window.set_all_polling(true);
 	// TODO: VSync getters and setters
 	// Enables VSync
 	self.context.set_swap_interval(glfw::SwapInterval::Sync(1));
