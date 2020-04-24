@@ -8,7 +8,11 @@
 *** Layer framework
 ** Application layer
 ** Window layer
-*** [[https://github.com/rust-windowing/winit][Winit]]
+*** [[https://github.com/PistonDevelopers/glfw-rs][glfw-rs]]
+
+"/GLFW bindings and wrapper for The Rust Programming Language./"
+
+*** +[[https://github.com/rust-windowing/winit][Winit]]+
 
 "/Cross-platform window creation and management in Rust/"
 
