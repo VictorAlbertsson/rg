@@ -31,6 +31,9 @@ impl Events for Window {
     fn on_create(&mut self) {
 	self.window.make_current();
 	self.window.set_key_polling(true);
+	// TODO: VSync getters and setters
+	// Enables VSync
+	self.context.set_swap_interval(glfw::SwapInterval::Sync(1));
     }
     fn on_delete(&mut self) {
 	self.window.set_should_close(true);
