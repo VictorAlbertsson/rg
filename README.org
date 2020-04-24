@@ -37,8 +37,8 @@ language for programs written in the Rust programming language./"
 ** Build system
 *** Hotswapping assets
 * Timeline
-** TODO School project [0%]
-- [ ] Window and rudimentary input system
+** TODO School project [25%]
+- [X] Window and rudimentary input system
 - [ ] Event system
 - [ ] Basic rendering and UI
 - [ ] Maybe a renderer?
