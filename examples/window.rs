@@ -1,6 +1,7 @@
-use rg::window::Window;
+use rg::window::WindowState;
 
 fn main() {
-    let w = Window::new();
-    w.run();
+    simple_logger::init().unwrap();
+    let ws = WindowState::new();
+    ws.run();
 }
