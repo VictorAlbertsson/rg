@@ -1,4 +1,4 @@
-#+TITLE: Rust Graphics
+#+TITLE: Realtime Graphics
 #+SUBTITLE: one-stop-shop API for graphical Rust applications
 #+AUTHOR: Victor Albertsson
 #+OPTIONS: num:nil toc:nil
@@ -8,19 +8,16 @@
 *** Layer framework
 ** Application layer
 ** Window layer
-*** [[https://github.com/PistonDevelopers/glfw-rs][glfw-rs]]
-
-"/GLFW bindings and wrapper for The Rust Programming Language./"
-
-*** +[[https://github.com/rust-windowing/winit][Winit]]+
+*** [[https://github.com/rust-windowing/winit][Winit]]
 
 "/Cross-platform window creation and management in Rust/"
 
 *** Input
 *** Events
 ** Renderer
+*** [[https://github.com/MaikKlein/ash][Ash]]
 
-Initially the backend will be OpenGL, later I might switch to gfx-hal.
+"/A very lightweight wrapper around Vulkan/"
 
 ** Render API abstraction
 ** Debugging support
@@ -31,20 +28,54 @@ Initially the backend will be OpenGL, later I might switch to gfx-hal.
 language for programs written in the Rust programming language./"
 
 ** Memory systems
-** Entity-component system (ECS)
-** Physics
+** Entity-component system (ECS) (will likely be moved to a separate project)
 ** File I/O, VFS
-** Build system
+** Physics (will likely be moved to a separate project)
+*** [[https://github.com/vcg-uvic/viper][VIPER]]
+"/Volume Invariant Position-based Elastic Rods/"
+**** Abstract
+ "We extend the formulation of position-based rods to include elastic
+ volumetric deformations. We achieve this by introducing an additional
+ degree of freedom per vertex -- isotropic scale (and its velocity).
+ Including scale enriches the space of possible deformations, allowing
+ the simulation of volumetric effects, such as a reduction in
+ cross-sectional area when a rod is stretched. We rigorously derive the
+ continuous formulation of its elastic energy potentials, and hence its
+ associated position-based dynamics (PBD) updates to realize this
+ model, enabling the simulation of up to 26000 DOFs at 140 Hz in our
+ GPU implementation. We further show how rods can provide a compact
+ alternative to tetrahedral meshes for the representation of complex
+ muscle deformations, as well as providing a convenient representation
+ for collision detection. This is achieved by modeling a muscle as a
+ bundle of rods, for which we also introduce a technique to
+ automatically convert a muscle surface mesh into a rods-bundle.
+ Finally, we show how rods and/or bundles can be skinned to a surface
+ mesh to drive its deformation, resulting in an alternative to cages
+ for real-time volumetric deformation."
+** Networking (will likely be moved to a separate project)
+*** [[https://web.mit.edu/Kerberos/][Kerberos]]
+"/Kerberos is a network authentication protocol./"
+
+It is designed to provide strong authentication for client/server
+applications by using secret-key cryptography.
+
+Fun fact: Resistant to quantum deciphering.
+
+[[https://www.youtube.com/watch?v=qW361k3-BtU][Taming Kerberos - Computerphile]]
+** Build system (will likely be moved to a separate project)
 *** Hotswapping assets
 * Timeline
 ** TODO School project [25%]
 - [X] Window and rudimentary input system
-- [ ] Event system
+- [ ] Layer system
 - [ ] Basic rendering and UI
 - [ ] Maybe a renderer?
 ** MVP (1.0.0) [0%]
 - [ ] OpenGL renderer
-- [ ] Unified windowing abstractions
+- [-] Unified windowing abstractions
+  - [X] Desktop
+  - [ ] Mobile
+  - [ ] Web
 - [ ] User input with cross-platform keycodes
 - [ ] UI system (with debugging specific UI)
 - [ ] Simple physics engine
@@ -57,3 +88,6 @@ language for programs written in the Rust programming language./"
 - [ ] Concurrency and multithreading
 - [ ] Asset management system
 - [ ] Advanced input system with raycasters (2D + 3D + UI)
+* Relevant Papers
+- [[https://github.com/vcg-uvic/viper][VIPER]]
+- [[http://theorangeduck.com/page/phase-functioned-neural-networks-character-control][Phase-Functioned Neural Networks for Character Control]]
