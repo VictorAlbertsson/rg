@@ -3,39 +3,6 @@ use winit::window::Window;
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::{EventLoop, ControlFlow};
 
-// Beacuse Rust is dumb and can't borrow individual struct fields!
-fn p_run(events: EventLoop<()>, window: Window, mut settings: WindowSettings) {
-    // TODO: Support multiple windows
-    events.run(move |event, _, control_flow| {
-	// Perhaps more logic should bo moved into the
-	// if-statement.
-	if settings.poll_events {
-	    *control_flow = ControlFlow::Poll;
-	} else {
-	    *control_flow = ControlFlow::Wait;
-	}
-	// TODO: Remove debug printing!
-	match event {
-	    Event::WindowEvent {
-		event: WindowEvent::CloseRequested,
-		..
-	    } => settings.running = false,
-	    Event::MainEventsCleared => {
-		// Application logic goes here.
-		window.request_redraw();
-	    },
-	    Event::RedrawRequested(_) => {
-		// Render logic goes here.
-	    },
-	    _ => (),
-	}
-	if !settings.running {
-	    info!("The close button was pressed; closing...");
-	    *control_flow = ControlFlow::Exit;
-	}
-    })
-}
-
 #[derive(Debug, Clone)]
 pub struct WindowSettings {
     pub running: bool,
@@ -83,4 +50,37 @@ impl WindowState {
 	// Who else thinks this is really dumb?
 	p_run(self.events, self.window, self.settings);
     }
+}
+
+// Beacuse Rust is dumb and can't borrow individual struct fields!
+fn p_run(events: EventLoop<()>, window: Window, mut settings: WindowSettings) {
+    // TODO: Support multiple windows
+    events.run(move |event, _, control_flow| {
+	// Perhaps more logic should bo moved into the
+	// if-statement.
+	if settings.poll_events {
+	    *control_flow = ControlFlow::Poll;
+	} else {
+	    *control_flow = ControlFlow::Wait;
+	}
+	// TODO: Remove debug printing!
+	match event {
+	    Event::WindowEvent {
+		event: WindowEvent::CloseRequested,
+		..
+	    } => settings.running = false,
+	    Event::MainEventsCleared => {
+		// Application logic goes here.
+		window.request_redraw();
+	    },
+	    Event::RedrawRequested(_) => {
+		// Render logic goes here.
+	    },
+	    _ => (),
+	}
+	if !settings.running {
+	    info!("The close button was pressed; closing...");
+	    *control_flow = ControlFlow::Exit;
+	}
+    })
 }
