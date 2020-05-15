@@ -33,10 +33,10 @@ An event is some function that takes no arguments and returns a boolean.
 ** Debugging support
 *** [[https://renderdoc.org/][RenderDoc]]
 
-"/RenderDoc is a free MIT licensed stand-alone graphics debugger that
-allows quick and easy single-frame capture and detailed introspection
-of any application using Vulkan, D3D11, OpenGL & OpenGL ES or D3D12
-across Windows 7 - 10, Linux, Android, Stadia, or Nintendo Switch™./"
+"/RenderDoc is a free MIT licensed stand-alone graphics debugger that/
+/allows quick and easy single-frame capture and detailed introspection/
+/of any application using Vulkan, D3D11, OpenGL & OpenGL ES or D3D12/
+/across Windows 7 - 10, Linux, Android, Stadia, or Nintendo Switch™./"
 
 Not sure how I would integrate this. Also the MIT license might be a problem.
 ** Scripting language (might get moved to another project)
