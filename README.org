@@ -30,9 +30,16 @@ An event is some function that takes no arguments and returns a boolean.
 
 "/A very lightweight wrapper around Vulkan/"
 
-** Render API abstraction
 ** Debugging support
-** Scripting language
+*** [[https://renderdoc.org/][RenderDoc]]
+
+"/RenderDoc is a free MIT licensed stand-alone graphics debugger that
+allows quick and easy single-frame capture and detailed introspection
+of any application using Vulkan, D3D11, OpenGL & OpenGL ES or D3D12
+across Windows 7 - 10, Linux, Android, Stadia, or Nintendo Switch™./"
+
+Not sure how I would integrate this. Also the MIT license might be a problem.
+** Scripting language (might get moved to another project)
 *** [[https://github.com/murarth/ketos][Ketos]]
 
 "/The primary goal of Ketos is to serve as a scripting and extension
@@ -40,7 +47,7 @@ language for programs written in the Rust programming language./"
 
 ** Memory systems
 ** Entity-component system (ECS) (will likely be moved to a separate project)
-** File I/O, VFS
+** File I/O, VFS (might get moved to another project)
 ** Networking (will likely be moved to a separate project)
 *** [[https://web.mit.edu/Kerberos/][Kerberos]]
 "/Kerberos is a network authentication protocol./"
@@ -91,6 +98,11 @@ Fun fact: Resistant to quantum deciphering.
 - [ ] Concurrency and multithreading
 - [ ] Asset management system
 - [ ] Advanced input system with raycasters (2D + 3D + UI)
-* Relevant Papers
-- [[https://github.com/vcg-uvic/viper][VIPER]]
-- [[http://theorangeduck.com/page/phase-functioned-neural-networks-character-control][Phase-Functioned Neural Networks for Character Control]]
+* Links
+** Papers
+ - [[https://github.com/vcg-uvic/viper][VIPER]]
+ - [[http://theorangeduck.com/page/phase-functioned-neural-networks-character-control][Phase-Functioned Neural Networks for Character Control]]
+** Projects
+- [[https://github.com/TheCherno/Hazel][Hazel Engine]]
+** Videos
+- [[https://www.youtube.com/playlist?list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT][Game Engine]]
