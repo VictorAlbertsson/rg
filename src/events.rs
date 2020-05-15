@@ -36,8 +36,18 @@ pub struct LayerStack {
 }
 
 impl LayerStack {
-    pub fn push_layer() {}
-    pub fn push_overlay() {}
-    pub fn pop_layer() {}
-    pub fn pop_overlay() {}
+    pub fn push_layer(&mut self, layer: Layer) {
+	self.layers.push(layer);
+    }
+    pub fn push_overlay(&mut self, layer: Layer) {
+	let mut result = vec![layer];
+	result.append(&mut self.layers);
+	self.layers = result;
+    }
+    pub fn pop_layer(&mut self) {
+	self.layers = self.layers.drain(1..).collect();
+    }
+    pub fn pop_overlay(&mut self) {
+	self.layers.pop();
+    }
 }
