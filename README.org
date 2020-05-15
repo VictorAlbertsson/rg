@@ -4,10 +4,21 @@
 #+OPTIONS: num:nil toc:nil
 * Outline
 ** Entrypoint
-*** ~Core~ application struct
-*** Layer framework
-** Application layer
-** Window layer
+*** Application
+Has the following fields:
+- LayerStack
+- Window
+*** LayerStack
+Type signature: Vec<Layer>
+*** Layer
+Type signature: Vec<Box<Event>>
+
+A layer is a collection of dynamically allocated events.
+*** Event
+Type signature: dyn Fn() -> bool
+
+An event is some function that takes no arguments and returns a boolean.
+** Windowing and layers
 *** [[https://github.com/rust-windowing/winit][Winit]]
 
 "/Cross-platform window creation and management in Rust/"
@@ -47,6 +58,17 @@ Fun fact: Resistant to quantum deciphering.
 - [X] Window and rudimentary input system
 - [ ] Layer system
 - [ ] Basic rendering and UI
+
+*** Week 20 (VT 2020)
+- Layers
+- Vulkan context creation
+
+*** Week 21 (VT 2020)
+- Vulkan context creation
+
+*** Week 22 (VT 2020)
+- Rendering
+
 ** MVP (1.0.0) [0%]
 - [ ] Vulkan renderer
   - [ ] Basic pipeline
