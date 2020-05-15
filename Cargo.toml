@@ -7,6 +7,7 @@ edition = "2018"
 [dependencies]
 log = "0.4"
 winit = "0.22"
+ash = "0.31"
 #imgui = "0.3" # or conrod
 #imgui-gfx # tutorial: https://github.com/WimbledonLabs/imgui_gfx_example
 #gl = "0.10"
