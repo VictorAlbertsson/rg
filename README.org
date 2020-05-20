@@ -37,19 +37,19 @@
 *** Raytracer
 **** Raymarcher
      Raymarchers are specilized raytracers that operate efficiently on
-     geometric object with well defined distance estimators and are
+     geometric objects with well defined distance estimators and are
      even more flexible than regular rays, however in scenes with many
      differing geometries or geometries with ill defined distance
      estimators the performance of raymarching degrades rapidly.
      Therefore it is especially useful when simulating complex
      materials such as clouds, smoke, fire or fractals. In such
-     instances they are the only real solution to calculate the light
-     behaves throughout the object.
+     instances they are the only real solution to calculate how the
+     light behaves throughout an object.
 **** Lighting
-     The ultimate goal is to support geodesic light geometry, however
-     this is quite advanced and allows for visualization of higher
-     dimensions, as seen in [[https://bitbucket.org/thedeemon/curved/src/default/]["Inside Curved Spaces"]] but with support
-     for non-planar environmental geometry.
+     The ultimate goal is to support geodesic light geometry, which
+     quite advanced amd allows for visualization of higher dimensions
+     as seen in [[https://bitbucket.org/thedeemon/curved/src/default/]["Inside Curved Spaces"]] but I would like to also
+     support non-planar environmental geometry.
 
      I would also like to support non-euclidean worlds (similar
      concept but with different implications) as seen in
@@ -61,7 +61,7 @@
      is outside the scope of this project I couldn't help myself but
      to put this link here: [[https://github.com/WAUthethird/Marble-Marcher-Community-Edition]["Marble Marcher: Community Edition"]] along
      with this video: [[https://www.youtube.com/watch?v=9U0XVdvQwAI]["Marble Marcher - A Fractal Physics Game"]],
-     supporting interactable fractals would be the work for a physics
+     supporting interactive fractals would be the work for a physics
      engine however /some/ light framework could be put in place to
      make it easier to render dynamically generated meshes.
 *** Multithreading renderer
@@ -120,13 +120,14 @@
    the superiority of raytracing, in order to properly simulate the
    visual effects of spacetime curvature you *need* to trace the paths
    the light takes throughout the Schwarzschild geometry. In a
-   rasterizer those rays needs to be firstly computed on the CPU
-   (which is in practice just a really slow ratracer) and then, well,
+   rasterizer those rays needs to first be computed on the CPU (which
+   is in practice just a really slow raytracer) and then, well,
    rasterized before the an image can be displayed. A raytracer on the
-   other hand can not only perform the equations natively on the GPU
-   but also directly output an image eliminating the additional
-   renderpasses and expensive CPU calculations the rasterizer has to
-   make.
+   other hand can not only perform the calculations natively on the
+   GPU but also directly output an image eliminating the additional
+   renderpasses and expensive CPU calculations that the rasterizer has
+   to make. Rays can also contain arbitrary other information which
+   makes such systems much more extensible.
    - [ ] Vulkan renderer
      - [ ] Basic pipeline
      - [ ] Texture pipeline
