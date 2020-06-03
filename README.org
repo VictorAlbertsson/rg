@@ -46,9 +46,9 @@
      instances they are the only real solution to calculate how the
      light behaves throughout an object.
 **** Lighting
-     The ultimate goal is to support geodesic light geometry, which
-     quite advanced amd allows for visualization of higher dimensions
-     as seen in [[https://bitbucket.org/thedeemon/curved/src/default/]["Inside Curved Spaces"]] but I would like to also
+     The ultimate goal is to support geodesic light geometry, which is
+     quite advanced and allows for visualization of higher dimensions
+     as seen in [[https://bitbucket.org/thedeemon/curved/src/default/]["Inside Curved Spaces"]], however I would also like to
      support non-planar environmental geometry.
 
      I would also like to support non-euclidean worlds (similar
@@ -57,13 +57,14 @@
 
      See also [[https://www.youtube.com/watch?v=ed2zmmcEryw]["Manifold Garden: Level Design in Impossible Geometry"]].
 
-     Fractal meshes would also be cool to implement. While I know this
-     is outside the scope of this project I couldn't help myself but
-     to put this link here: [[https://github.com/WAUthethird/Marble-Marcher-Community-Edition]["Marble Marcher: Community Edition"]] along
-     with this video: [[https://www.youtube.com/watch?v=9U0XVdvQwAI]["Marble Marcher - A Fractal Physics Game"]],
-     supporting interactive fractals would be the work for a physics
-     engine however /some/ light framework could be put in place to
-     make it easier to render dynamically generated meshes.
+     Fractal meshes would also be interesting to implement. While I
+     know this is outside the scope of this project I couldn't help
+     myself but to put this link here: [[https://github.com/WAUthethird/Marble-Marcher-Community-Edition]["Marble Marcher: Community
+     Edition"]] along with this video: [[https://www.youtube.com/watch?v=9U0XVdvQwAI]["Marble Marcher - A Fractal
+     Physics Game"]], supporting interactive fractals would be the work
+     for a physics engine however /some/ light framework could be put
+     in place to make it easier to render dynamically generated
+     meshes.
 *** Multithreading renderer
 
 ** Debugging support
@@ -80,6 +81,8 @@
 
     "/The primary goal of Ketos is to serve as a scripting and extension
     language for programs written in the Rust programming language./"
+*** Guile
+
 
 ** Memory systems
 ** Entity-component system (ECS) (will likely be moved to a separate project)
@@ -157,6 +160,7 @@
 ** Papers
    - [[https://github.com/vcg-uvic/viper][VIPER]]
    - [[http://theorangeduck.com/page/phase-functioned-neural-networks-character-control][Phase-Functioned Neural Networks for Character Control]]
+   - [[http://www.gilbertbernstein.com/resources/booleans2009.pdf][Fast, Exact, Linear Booleans]]
 ** Articles
    - [[https://rantonels.github.io/starless/][How to draw a Black Hole]]
 ** Projects
