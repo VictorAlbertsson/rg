@@ -52,6 +52,75 @@ impl Renderer {
 		.message_type(vk::DebugUtilsMessageTypeFlagsEXT::all())
 		.pfn_user_callback(Some(vulkan_debug_callback));
 	    let debug_utils_loader = DebugUtils::new(&entry, &instance);
+	    let debug_calback = debug_utils_loader
+		.create_debug_utils_messenger(&debug_info, None)
+		.unwrap();
+	    let surface = create_surface(&entry, &instance, &window).unwrap();
+	    let pdevices = instance
+		.enumerate_physical_devices()
+		.expect("Physical device error.");
+	    let surface_loader = Surface::new(&entry, &instance);
+	    let (pdevice, queue_family_index) = pdevices
+		.iter()
+		.map(|pdevice| {
+		    instance
+			.get_physical_device_queue_family_properties(*pdevice)
+			.iter()
+			.enumerate()
+			.filter_map(|(index, ref info)| {
+			    let supports_graphic_and_surface =
+				info.queue_flags.contains(vk::QueueFlags::GRAPHICS)
+				&& surface_loader
+				.get_physical_device_surface_support(*pdevice, index as u32, surface)
+				.unwrap();
+			    if supports_graphic_and_surface {
+				Some((*pdevice, index))
+			    } else {
+				None
+			    }
+			})
+			.next()
+		})
+		.filter_map(|v| v)
+		.next()
+		.expect("Couldn't find suitable device.");
+	    let queue_family_index = queue_family_index as u32;
+	    let device_extension_names_raw = [Swapchain::name().as_ptr()];
+	    let features = vk::PhysicalDeviceFeatures {
+		shader_clip_distance: 1,
+		..Default::default(),
+	    };
+	    let priorities = [1.0];
+	    let queue_info = [vk::DeviceQueueCreateInfo::builder()
+			      .queue_family_index(queue_family_index)
+			      .queue_priorities(&priorities)
+			      .build()];
+	    let device_create_info = vk::DeviceCreateInfo::builder()
+		.queue_create_infos(&queue_info)
+		.enabled_extension_names(&device_extension_names_raw)
+		.enabled_features(&features);
+	    let device: Device = instance
+		.create_device(pdevice, &device_create_info, None)
+		.unwrap();
+	    let present_queue = device.get_device_queue(queue_family_index as u32, 0);
+	    let surface_formats = surface_loader
+		.get_physical_device_surface_formats(pdevice, surface)
+		.unwrap();
+	    let surface_format = surface_formats
+		.iter()
+		.map(|sfmt| match sfmt.format {
+		    vk::Format::UNDEFINED => vk::SurfaceFormatKHR {
+			format: vk::Format::B8G8R8_UNORM,
+			color_space: sfmt.color_space,
+		    },
+		    _ => *sfmt,
+		})
+		.next()
+		.expect("Unable to find suitable surface format.");
+	    let surface_capabilities = surface_loader
+		.get_physical_device_surface_capabilities(pdevice, surface)
+		.unwrap();
+
 	}
 	Self {
 
@@ -62,8 +131,7 @@ impl Renderer {
 #[cfg(all(unix, not(target_os = "android"), not(target_os = "macos")))]
 unsafe fn create_surface<E, I>(entry: &E, instance: &I, window: &winit::window::Window)
 			       -> Result<vk::SurfaceKHR, vk::Result>
-where E: EntryV1_0,
-      I: InstanceV1_0 {
+where E: EntryV1_0, I: InstanceV1_0 {
     use winit::platform::unix::WindowExtUnix;
     let x11_display = window.xlib_display().unwrap();
     let x11_window  = window.xlib_window().unwrap();
