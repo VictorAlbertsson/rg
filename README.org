@@ -1,0 +1,173 @@
+#+TITLE: Realtime Graphics
+#+SUBTITLE: one-stop-shop API for graphical Rust applications
+#+AUTHOR: Victor Albertsson
+#+OPTIONS: num:nil toc:nil
+* Outline
+** Entrypoint
+*** Application
+    Has the following fields:
+    - LayerStack
+    - Window
+*** LayerStack
+    Type signature: Vec<Layer>
+*** Layer
+    Type signature: Vec<Box<Event>>
+
+    A layer is a collection of dynamically allocated events.
+*** Event
+    Type signature: dyn Fn() -> bool
+
+    An event is some function that takes no arguments and returns a boolean.
+** Windowing and layers
+*** [[https://github.com/rust-windowing/winit][Winit]]
+
+    "/Cross-platform window creation and management in Rust/"
+
+*** Input
+*** Events
+** Renderer
+*** [[https://github.com/MaikKlein/ash][Ash]]
+    "/A very lightweight wrapper around Vulkan/"
+*** [[https://github.com/google/shaderc-rs][Shaderc]]
+    "/Shaderc provides the Compiler interface to compile GLSL/HLSL source/
+    /code into SPIR-V binary modules or assembly code. It can also assemble/
+    /SPIR-V assembly into binary module. Default compilation behavior can/
+    /be adjusted using CompileOptions. Successful results are kept in/
+    /CompilationArtifacts./"
+*** Raytracer
+**** Raymarcher
+     Raymarchers are specilized raytracers that operate efficiently on
+     geometric objects with well defined distance estimators and are
+     even more flexible than regular rays, however in scenes with many
+     differing geometries or geometries with ill defined distance
+     estimators the performance of raymarching degrades rapidly.
+     Therefore it is especially useful when simulating complex
+     materials such as clouds, smoke, fire or fractals. In such
+     instances they are the only real solution to calculate how the
+     light behaves throughout an object.
+**** Lighting
+     The ultimate goal is to support geodesic light geometry, which is
+     quite advanced and allows for visualization of higher dimensions
+     as seen in [[https://bitbucket.org/thedeemon/curved/src/default/]["Inside Curved Spaces"]], however I would also like to
+     support non-planar environmental geometry.
+
+     I would also like to support non-euclidean worlds (similar
+     concept but with different implications) as seen in
+     [[https://github.com/HackerPoet/NonEuclidean]["NonEuclidean"]].
+
+     See also [[https://www.youtube.com/watch?v=ed2zmmcEryw]["Manifold Garden: Level Design in Impossible Geometry"]].
+
+     Fractal meshes would also be interesting to implement. While I
+     know this is outside the scope of this project I couldn't help
+     myself but to put this link here: [[https://github.com/WAUthethird/Marble-Marcher-Community-Edition]["Marble Marcher: Community
+     Edition"]] along with this video: [[https://www.youtube.com/watch?v=9U0XVdvQwAI]["Marble Marcher - A Fractal
+     Physics Game"]], supporting interactive fractals would be the work
+     for a physics engine however /some/ light framework could be put
+     in place to make it easier to render dynamically generated
+     meshes.
+*** Multithreading renderer
+
+** Debugging support
+*** [[https://renderdoc.org/][RenderDoc]]
+
+    "/RenderDoc is a free MIT licensed stand-alone graphics debugger that/
+    /allows quick and easy single-frame capture and detailed introspection/
+    /of any application using Vulkan, D3D11, OpenGL & OpenGL ES or D3D12/
+    /across Windows 7 - 10, Linux, Android, Stadia, or Nintendo Switch™./"
+
+    Not sure how I would integrate this. Also the MIT license might be a problem.
+** Scripting language (might get moved to another project)
+*** [[https://github.com/murarth/ketos][Ketos]]
+
+    "/The primary goal of Ketos is to serve as a scripting and extension
+    language for programs written in the Rust programming language./"
+*** Guile
+
+
+** Memory systems
+** Entity-component system (ECS) (will likely be moved to a separate project)
+** File I/O, VFS (might get moved to another project)
+** Networking (will likely be moved to a separate project)
+*** [[https://web.mit.edu/Kerberos/][Kerberos]]
+    "/Kerberos is a network authentication protocol./"
+
+    It is designed to provide strong authentication for client/server
+    applications by using secret-key cryptography.
+
+    Fun fact: Resistant to quantum deciphering.
+
+    [[https://www.youtube.com/watch?v=qW361k3-BtU][Taming Kerberos - Computerphile]]
+** Build system (will likely be moved to a separate project)
+*** Hotswapping assets
+* Timeline
+** TODO School project [66%]
+   - [X] Window and rudimentary input system
+   - [X] Layer system
+   - [-] Basic rendering and UI
+     - [-] Vulkan renderer
+     - [ ] Debug UI
+
+*** Week 20 (VT 2020)
+    - Layers
+    - Vulkan context creation
+
+*** Week 21 (VT 2020)
+    - Vulkan context creation
+
+*** Week 22 (VT 2020)
+    - Rendering
+
+** MVP (1.0.0) [20%]
+   I'm torn on whether a rasterizer is necessary or not, rays are the
+   future and also more flexible. Black holes are a good example of
+   the superiority of raytracing, in order to properly simulate the
+   visual effects of spacetime curvature you *need* to trace the paths
+   the light takes throughout the Schwarzschild geometry. In a
+   rasterizer those rays needs to first be computed on the CPU (which
+   is in practice just a really slow raytracer) and then, well,
+   rasterized before the an image can be displayed. A raytracer on the
+   other hand can not only perform the calculations natively on the
+   GPU but also directly output an image eliminating the additional
+   renderpasses and expensive CPU calculations that the rasterizer has
+   to make. Rays can also contain arbitrary other information which
+   makes such systems much more extensible.
+   - [ ] Vulkan renderer
+     - [ ] Basic pipeline
+     - [ ] Texture pipeline
+     - [ ] Rasterizer (?)
+     - [ ] Raytracer
+   - [-] Unified windowing abstractions
+     - [X] Desktop
+     - [ ] Mobile
+     - [ ] Web
+   - [X] User input with cross-platform keycodes
+   - [ ] UI system (with debugging specific UI)
+** Product release (2.0.0) [0%]
+   - [ ] Advanced vulkan renderer
+     - [ ] Geodesic raytracer
+     - [ ] Raymarcher
+     - [ ] Cloud system
+     - [ ] Water system
+   - [ ] Flexible and extensible event systems
+   - [ ] Concurrency and multithreading
+   - [ ] Multiple windows
+   - [ ] Asset management system
+   - [ ] Advanced input system with raycasters (2D + 3D + UI)
+     - [ ] UI
+     - [ ] 2D
+     - [ ] 3D
+* Links
+** Papers
+   - [[https://github.com/vcg-uvic/viper][VIPER]]
+   - [[http://theorangeduck.com/page/phase-functioned-neural-networks-character-control][Phase-Functioned Neural Networks for Character Control]]
+   - [[http://www.gilbertbernstein.com/resources/booleans2009.pdf][Fast, Exact, Linear Booleans]]
+** Articles
+   - [[https://rantonels.github.io/starless/][How to draw a Black Hole]]
+** Projects
+   - [[https://github.com/TheCherno/Hazel][Hazel Engine]]
+   - [[https://bitbucket.org/thedeemon/curved/src/default/][Inside Curved Spaces]]
+   - [[https://github.com/HackerPoet/NonEuclidean][NonEuclidean]]
+** Videos
+   - [[https://www.youtube.com/playlist?list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT][Game Engine]]
+   - [[https://www.youtube.com/watch?v=ed2zmmcEryw][Manifold Garden: Level Design in Impossible Geometry]]
+   - [[https://www.youtube.com/watch?v=svLzmFuSBhk][How to Make 3D Fractals]] (describes raymarching)
